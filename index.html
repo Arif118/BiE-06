@@ -32,8 +32,6 @@ body{
     overflow-x:hidden;
 }
 
-/* Animated Background*/
-
 body::before{
     content:'';
     position:fixed;
@@ -54,14 +52,35 @@ body::before{
 .stars{
     position:fixed;
     inset:0;
-    background-image:
-    radial-gradient(white 1px, transparent 1px);
+    background-image:radial-gradient(white 1px, transparent 1px);
     background-size:40px 40px;
     opacity:.08;
     z-index:-1;
 }
 
-/* Hero */
+.orb{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(50px);
+    opacity:.15;
+    z-index:-1;
+}
+
+.orb1{
+    width:300px;
+    height:300px;
+    background:#00e5ff;
+    top:10%;
+    left:-100px;
+}
+
+.orb2{
+    width:300px;
+    height:300px;
+    background:#8a5cff;
+    right:-100px;
+    bottom:10%;
+}
 
 .hero{
     min-height:100vh;
@@ -101,13 +120,12 @@ body::before{
     margin-top:40px;
     color:var(--primary);
     animation:bounce 2s infinite;
+    text-decoration:none;
 }
 
 @keyframes bounce{
     50%{transform:translateY(10px);}
 }
-
-/* Section */
 
 section{
     width:min(1300px,90%);
@@ -120,51 +138,6 @@ section{
     margin-bottom:30px;
     text-align:center;
 }
-
-/* Students */
-
-.students{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:20px;
-}
-
-.student{
-    background:var(--glass);
-    border:1px solid var(--border);
-    backdrop-filter:blur(12px);
-    padding:22px;
-    border-radius:20px;
-    text-align:center;
-    transition:.4s;
-    position:relative;
-    overflow:hidden;
-}
-
-.student::before{
-    content:'';
-    position:absolute;
-    inset:-100%;
-    background:linear-gradient(
-    45deg,
-    transparent,
-    rgba(255,255,255,.15),
-    transparent
-    );
-    transition:.6s;
-}
-
-.student:hover::before{
-    inset:100%;
-}
-
-.student:hover{
-    transform:translateY(-10px) scale(1.03);
-    border-color:var(--primary);
-    box-shadow:0 0 25px rgba(0,229,255,.2);
-}
-
-/* Gallery */
 
 .gallery{
     display:grid;
@@ -194,36 +167,6 @@ section{
     padding:18px;
 }
 
-/* Upload */
-
-.upload-box{
-    background:var(--glass);
-    border:2px dashed rgba(255,255,255,.2);
-    padding:50px;
-    border-radius:25px;
-    text-align:center;
-}
-
-.upload-box input{
-    margin-top:15px;
-    color:white;
-}
-
-.preview{
-    margin-top:30px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-}
-
-.preview img{
-    width:100%;
-    border-radius:15px;
-    border:1px solid var(--border);
-}
-
-/* Timeline */
-
 .timeline{
     display:grid;
     gap:20px;
@@ -236,142 +179,57 @@ section{
     border-radius:15px;
 }
 
-/* Footer */
-
 footer{
     text-align:center;
     padding:40px;
     color:var(--muted);
 }
 
-/* Floating Orbs */
-
-.orb{
-    position:fixed;
-    border-radius:50%;
-    filter:blur(50px);
-    opacity:.15;
-    z-index:-1;
-}
-
-.orb1{
-    width:300px;
-    height:300px;
-    background:#00e5ff;
-    top:10%;
-    left:-100px;
-}
-
-.orb2{
-    width:300px;
-    height:300px;
-    background:#8a5cff;
-    right:-100px;
-    bottom:10%;
-}
-
 .arif{
     color:var(--primary);
 }
 
-</style>
-</head>
-<body>
-<div class="stars"></div>
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
-<section class="hero">
-     <h3 class= "arif"> Welcome to </h3>
-    <h1>BiE - 06</h1>
-    <p>
-       Where lecture slides are lost, notes are borrowed, assignments are copied respectfully, and everyone promises to start studying from tomorrow.
-   </p>
-    <a href = "https://arif118.github.io/BiE-06/dashboard.html" style="text-decoration: none; " class = "scroll">▼ Information Dashboard ▼ </a>
-</section>
-
-<style>
 .dev-notice{
     max-width:900px;
     margin:25px auto;
-
     padding:18px 25px;
-
     text-align:center;
-
     color:#ffffff;
     font-size:1rem;
     font-weight:600;
-
     background:linear-gradient(
         135deg,
         rgba(255,60,60,0.25),
         rgba(255,120,120,0.15)
     );
-
     border:1px solid rgba(255,80,80,0.4);
-
     border-radius:18px;
-
     backdrop-filter:blur(12px);
-
-    box-shadow:
-    0 0 25px rgba(255,70,70,0.15);
-
+    box-shadow:0 0 25px rgba(255,70,70,0.15);
     animation:pulseWarning 2s infinite;
 }
 
 @keyframes pulseWarning{
-
     0%{
-        box-shadow:
-        0 0 10px rgba(255,70,70,0.15);
+        box-shadow:0 0 10px rgba(255,70,70,0.15);
     }
-
     50%{
-        box-shadow:
-        0 0 25px rgba(255,70,70,0.35);
+        box-shadow:0 0 25px rgba(255,70,70,0.35);
     }
-
     100%{
-        box-shadow:
-        0 0 10px rgba(255,70,70,0.15);
+        box-shadow:0 0 10px rgba(255,70,70,0.15);
     }
-
 }
-</style>
-<div class="dev-notice">
-    ⚠️ This website is under development. More features are coming next, In Sha Allah.
-</div>
-<div class="gallery-actions">
-    <h2>📸 Department Gallery</h2>
-    <p>Upload and explore memorable moments of BiE-06.</p>
 
-    <div class="button-group">
-
-       <a href="https://arif118.github.io/BiE-06/upload_form.html" style="text-decoration: none;"> <button class="upload-btn">
-            📸 Upload Photo
-        </button>
-</a>
-        <a href="https://arif118.github.io/BiE-06/note_gallery.html" class="gallery-btn">
-            🖼 View Gallery
-        </a>
-
-    </div>
-
-</div>
-
-<style>
 .gallery-actions{
     max-width:700px;
     margin:40px auto;
     padding:35px;
     text-align:center;
-
     background:rgba(255,255,255,0.05);
     border:1px solid rgba(255,255,255,0.08);
     border-radius:24px;
     backdrop-filter:blur(12px);
-
     animation:fadeUp .8s ease;
 }
 
@@ -395,19 +253,15 @@ footer{
 
 .upload-btn,
 .gallery-btn{
-
+    display:inline-block;
     padding:15px 30px;
     border:none;
     border-radius:16px;
-
     font-size:1rem;
     font-weight:600;
-
     cursor:pointer;
     text-decoration:none;
-
     transition:0.3s ease;
-
     color:white;
 }
 
@@ -430,9 +284,7 @@ footer{
 .upload-btn:hover,
 .gallery-btn:hover{
     transform:translateY(-5px) scale(1.03);
-
-    box-shadow:
-    0 0 25px rgba(0,229,255,.25);
+    box-shadow:0 0 25px rgba(0,229,255,.25);
 }
 
 @keyframes fadeUp{
@@ -458,44 +310,257 @@ footer{
     }
 
 }
-</style>
 
-<script>
-function openUploadModal(){
-    alert("Upload system coming next 🚀");
+/* MENU BUTTON */
+
+.menu-btn{
+    position:fixed;
+    top:20px;
+    right:20px;
+    z-index:1001;
+
+    width:55px;
+    height:55px;
+
+    border:none;
+    cursor:pointer;
+
+    border-radius:14px;
+
+    color:white;
+    font-size:1.6rem;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.3s;
 }
-</script>
-<section>
-    <h2 class="section-title">🎓 Our Students</h2>
 
-    <div class="students">
-        <div class="student">Muhit</div>
-        <div class="student">Soroj</div>
-        <div class="student">Sakur</div>
-        <div class="student">Rothi</div>
-        <div class="student">Minhaz</div>
-        <div class="student"><h3 class= "arif">Arif</h3></div>
-        <div class="student">Atif</div>
-        <div class="student">Fahim</div>
-        <div class="student">Mafi</div>
-        <div class="student">Apon</div>
-        <div class="student">Rukaiya</div>
-        <div class="student">Nafis</div>
-        <div class="student">Swapnil</div>
-        <div class="student">Sorna</div>
-        <div class="student">Pritom</div>
-        <div class="student">Rufaida</div>
-        <div class="student">Bikash</div>
-        <div class="student">Pushpita</div>
-        <div class="student">Tamanna</div>
-        <div class="student">Rafsan</div>
-        <div class="student">Nusrat</div>
-    </div>
+.menu-btn:hover{
+    transform:scale(1.08);
+}
+
+/* OVERLAY */
+
+.overlay{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    backdrop-filter:blur(5px);
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:.35s;
+
+    z-index:998;
+}
+
+.overlay.active{
+    opacity:1;
+    visibility:visible;
+}
+
+/* SIDE MENU */
+
+.side-menu{
+
+    position:fixed;
+
+    top:0;
+    right:-340px;
+
+    width:320px;
+    height:100vh;
+
+    z-index:999;
+
+    padding:90px 25px;
+
+    background:rgba(10,15,30,.95);
+
+    backdrop-filter:blur(20px);
+
+    border-left:1px solid rgba(255,255,255,.08);
+
+    transition:.45s ease;
+}
+
+.side-menu.active{
+    right:0;
+}
+
+.side-menu h2{
+
+    margin-bottom:30px;
+
+    color:white;
+
+    font-size:1.5rem;
+
+    background:linear-gradient(
+        90deg,
+        #00e5ff,
+        #8a5cff
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.side-menu a{
+
+    display:block;
+
+    text-decoration:none;
+
+    color:white;
+
+    margin-bottom:18px;
+
+    padding:16px 20px;
+
+    border-radius:16px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.06);
+
+    transition:.3s;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.side-menu a::before{
+
+    content:'';
+
+    position:absolute;
+
+    top:0;
+    left:-100%;
+
+    width:100%;
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.15),
+        transparent
+    );
+
+    transition:.5s;
+}
+
+.side-menu a:hover::before{
+    left:100%;
+}
+
+.side-menu a:hover{
+
+    transform:translateX(8px);
+
+    border-color:rgba(0,229,255,.4);
+
+    box-shadow:
+    0 0 18px rgba(0,229,255,.15);
+}
+
+
+
+
+</style>
+</head>
+
+<body>
+
+<button id="menuBtn" class="menu-btn">
+☰
+</button>
+
+<div id="overlay" class="overlay"></div>
+
+<nav id="sideMenu" class="side-menu">
+
+    <h2>Navigation</h2>
+
+    <a href="https://arif118.github.io/BiE-06/dashboard.html">
+        📊 Dashboard
+    </a>
+
+    <a href="https://arif118.github.io/BiE-06/upload_form.html">
+        📤 Upload
+    </a>
+
+    <a href="https://arif118.github.io/BiE-06/note_gallery.html">
+        🖼 Gallery
+    </a>
+
+    <a href="https://arif118.github.io/BiE-06/future.html">
+        🚀 Future Improvement
+    </a>
+
+</nav>
+
+
+<div class="stars"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<section class="hero">
+    <h3 class="arif">Welcome to</h3>
+
+    <h1>BiE - 06</h1>
+
+    <p>
+        Where lecture slides are lost, notes are borrowed, assignments are copied respectfully, and everyone promises to start studying from tomorrow.
+    </p>
+
+    <a href="https://arif118.github.io/BiE-06/dashboard.html" class="scroll">
+        ▼ Information Dashboard ▼
+    </a>
 </section>
 
+<div class="dev-notice">
+    ⚠️ This website is under development. More features are coming next, In Sha Allah.
+</div>
+
+<div class="gallery-actions">
+
+    <h2>📸 Department Gallery</h2>
+
+    <p>
+        Upload and explore memorable moments of BiE-06.
+    </p>
+
+    <div class="button-group">
+
+        <a href="https://arif118.github.io/BiE-06/upload_form.html" class="upload-btn">
+            📸 Upload Photo
+        </a>
+
+        <a href="https://arif118.github.io/BiE-06/note_gallery.html" class="gallery-btn">
+            🖼 View Gallery
+        </a>
+
+    </div>
+
+</div>
+
 <section>
+
     <h2 class="section-title">📸 Tour Gallery</h2>
+
     <div class="gallery">
+
         <div class="photo-card">
             <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200" alt="">
             <h3>Adventure Begins</h3>
@@ -510,23 +575,17 @@ function openUploadModal(){
             <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200" alt="">
             <h3>Nature Exploration</h3>
         </div>
+
     </div>
+
 </section>
 
 <section>
-    <h2 class="section-title">🚀 Upload New Tour Photos</h2>
 
-    <div class="upload-box">
-        <h3>Select Photos From Your Device</h3>
-        <input type="file" id="upload" multiple accept="image/*">
-        <div class="preview" id="preview"></div>
-    </div>
-</section>
-
-<section>
     <h2 class="section-title">🗺 Tour Timeline</h2>
 
     <div class="timeline">
+
         <div class="event">
             <h3>Departure</h3>
             <p>Start of the unforgettable department journey.</p>
@@ -546,39 +605,70 @@ function openUploadModal(){
             <h3>Return Home</h3>
             <p>Journey ends, memories remain.</p>
         </div>
+
     </div>
+
 </section>
 
 <footer>
-    Developer by Ar!f️ for Department Students • GitHub Pages Ready
+    Developer by Ar!f for Department Students • GitHub Pages Ready
 </footer>
 
 <script>
-const upload=document.getElementById("upload");
-const preview=document.getElementById("preview");
 
-upload.addEventListener("change",function(){
+const menuBtn =
+document.getElementById("menuBtn");
 
-    preview.innerHTML="";
+const sideMenu =
+document.getElementById("sideMenu");
 
-    [...this.files].forEach(file=>{
+const overlay =
+document.getElementById("overlay");
 
-        const reader=new FileReader();
+menuBtn.addEventListener("click",()=>{
 
-        reader.onload=e=>{
+    sideMenu.classList.toggle("active");
+    overlay.classList.toggle("active");
 
-            const img=document.createElement("img");
-            img.src=e.target.result;
-            preview.appendChild(img);
+});
 
-        };
+overlay.addEventListener("click",()=>{
 
-        reader.readAsDataURL(file);
+    sideMenu.classList.remove("active");
+    overlay.classList.remove("active");
+
+});
+
+/* Click Animation */
+
+document
+.querySelectorAll(".side-menu a")
+.forEach(item=>{
+
+    item.addEventListener("click",function(){
+
+        this.animate(
+        [
+            {
+                transform:"scale(1)"
+            },
+            {
+                transform:"scale(.92)"
+            },
+            {
+                transform:"scale(1)"
+            }
+        ],
+        {
+            duration:250
+        });
 
     });
 
 });
+
 </script>
+
 
 </body>
 </html>
