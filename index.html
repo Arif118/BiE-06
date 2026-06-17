@@ -270,27 +270,201 @@ footer{
     bottom:10%;
 }
 
-#arif{
+.arif{
     color:var(--primary);
 }
 
 </style>
 </head>
 <body>
-
 <div class="stars"></div>
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
-
 <section class="hero">
+     <h3 class= "arif"> Welcome to </h3>
     <h1>BiE - 06</h1>
     <p>
-        Memories, Adventures, Friendship & Exploration.
-        A digital space for our department to preserve unforgettable moments.
-    </p>
+       Where lecture slides are lost, notes are borrowed, assignments are copied respectfully, and everyone promises to start studying from tomorrow.
+   </p>
     <a href = "https://arif118.github.io/BiE-06/dashboard.html" style="text-decoration: none; " class = "scroll">▼ Information Dashboard ▼ </a>
 </section>
 
+<style>
+.dev-notice{
+    max-width:900px;
+    margin:25px auto;
+
+    padding:18px 25px;
+
+    text-align:center;
+
+    color:#ffffff;
+    font-size:1rem;
+    font-weight:600;
+
+    background:linear-gradient(
+        135deg,
+        rgba(255,60,60,0.25),
+        rgba(255,120,120,0.15)
+    );
+
+    border:1px solid rgba(255,80,80,0.4);
+
+    border-radius:18px;
+
+    backdrop-filter:blur(12px);
+
+    box-shadow:
+    0 0 25px rgba(255,70,70,0.15);
+
+    animation:pulseWarning 2s infinite;
+}
+
+@keyframes pulseWarning{
+
+    0%{
+        box-shadow:
+        0 0 10px rgba(255,70,70,0.15);
+    }
+
+    50%{
+        box-shadow:
+        0 0 25px rgba(255,70,70,0.35);
+    }
+
+    100%{
+        box-shadow:
+        0 0 10px rgba(255,70,70,0.15);
+    }
+
+}
+</style>
+<div class="dev-notice">
+    ⚠️ This website is under development. More features are coming next, In Sha Allah.
+</div>
+<div class="gallery-actions">
+    <h2>📸 Department Gallery</h2>
+    <p>Upload and explore memorable moments of BiE-06.</p>
+
+    <div class="button-group">
+
+        <button class="upload-btn" onclick="openUploadModal()">
+            📸 Upload Photo
+        </button>
+
+        <a href="https://arif118.github.io/BiE-06/note_gallery.html" class="gallery-btn">
+            🖼 View Gallery
+        </a>
+
+    </div>
+
+</div>
+
+<style>
+.gallery-actions{
+    max-width:700px;
+    margin:40px auto;
+    padding:35px;
+    text-align:center;
+
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:24px;
+    backdrop-filter:blur(12px);
+
+    animation:fadeUp .8s ease;
+}
+
+.gallery-actions h2{
+    color:#ffffff;
+    margin-bottom:10px;
+    font-size:2rem;
+}
+
+.gallery-actions p{
+    color:#aab3d1;
+    margin-bottom:25px;
+}
+
+.button-group{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.upload-btn,
+.gallery-btn{
+
+    padding:15px 30px;
+    border:none;
+    border-radius:16px;
+
+    font-size:1rem;
+    font-weight:600;
+
+    cursor:pointer;
+    text-decoration:none;
+
+    transition:0.3s ease;
+
+    color:white;
+}
+
+.upload-btn{
+    background:linear-gradient(
+        135deg,
+        #00e5ff,
+        #007bff
+    );
+}
+
+.gallery-btn{
+    background:linear-gradient(
+        135deg,
+        #8a5cff,
+        #00e5ff
+    );
+}
+
+.upload-btn:hover,
+.gallery-btn:hover{
+    transform:translateY(-5px) scale(1.03);
+
+    box-shadow:
+    0 0 25px rgba(0,229,255,.25);
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@media(max-width:600px){
+
+    .button-group{
+        flex-direction:column;
+    }
+
+    .upload-btn,
+    .gallery-btn{
+        width:100%;
+    }
+
+}
+</style>
+
+<script>
+function openUploadModal(){
+    alert("Upload system coming next 🚀");
+}
+</script>
 <section>
     <h2 class="section-title">🎓 Our Students</h2>
 
@@ -300,7 +474,7 @@ footer{
         <div class="student">Sakur</div>
         <div class="student">Rothi</div>
         <div class="student">Minhaz</div>
-        <div class="student"><h3 id= "arif">Arif</h3></div>
+        <div class="student"><h3 class= "arif">Arif</h3></div>
         <div class="student">Atif</div>
         <div class="student">Fahim</div>
         <div class="student">Mafi</div>
@@ -321,7 +495,6 @@ footer{
 
 <section>
     <h2 class="section-title">📸 Tour Gallery</h2>
-
     <div class="gallery">
         <div class="photo-card">
             <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200" alt="">
@@ -377,7 +550,7 @@ footer{
 </section>
 
 <footer>
-    Made with ❤️ for Department Students • GitHub Pages Ready
+    Developer by Ar!f️ for Department Students • GitHub Pages Ready
 </footer>
 
 <script>
