@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Note Gallery | BiE-06</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+:root{
+    --bg:#070b14;
+    --card:rgba(255,255,255,0.06);
+    --border:rgba(255,255,255,0.10);
+    --text:#f5f7ff;
+    --muted:#9ca7c7;
+    --primary:#00e5ff;
+    --secondary:#8a5cff;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at 20% 20%, rgba(0,229,255,.15), transparent 30%),
+    radial-gradient(circle at 80% 20%, rgba(138,92,255,.15), transparent 30%),
+    radial-gradient(circle at 50% 80%, rgba(0,255,170,.10), transparent 30%);
+    z-index:-2;
+}
+
+.stars{
+    position:fixed;
+    inset:0;
+    background-image:radial-gradient(white 1px, transparent 1px);
+    background-size:40px 40px;
+    opacity:.05;
+    z-index:-1;
+}
+
+.container{
+    width:min(1400px,94%);
+    margin:auto;
+}
+
+.hero{
+    text-align:center;
+    padding:60px 15px 30px;
+}
+
+.hero h1{
+    font-size:clamp(2rem,6vw,4rem);
+    background:linear-gradient(
+        90deg,
+        #00e5ff,
+        #8a5cff,
+        #00ffb3
+    );
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    color:var(--muted);
+    margin-top:12px;
+}
+
+.back-btn{
+    display:inline-block;
+    margin-top:20px;
+    text-decoration:none;
+    color:white;
+    background:linear-gradient(
+        135deg,
+        #00e5ff,
+        #8a5cff
+    );
+    padding:12px 24px;
+    border-radius:14px;
+    transition:.3s;
+}
+
+.back-btn:hover{
+    transform:translateY(-4px);
+}
+
+.search-container{
+    margin:20px 0 30px;
+}
+
+.search-box{
+    width:100%;
+    padding:16px;
+    border:none;
+    outline:none;
+    border-radius:16px;
+    color:white;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fill,minmax(300px,1fr));
+    gap:24px;
+    margin-bottom:40px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:24px;
+    overflow:hidden;
+    backdrop-filter:blur(15px);
+    transition:.35s;
+    animation:fadeUp .6s ease;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 0 25px rgba(0,229,255,.12);
+}
+
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    display:block;
+}
+
+.card-content{
+    padding:18px;
+}
+
+.card-title{
+    font-size:1.1rem;
+    font-weight:700;
+    margin-bottom:12px;
+}
+
+.meta{
+    color:var(--muted);
+    margin:6px 0;
+    font-size:.9rem;
+}
+
+.category{
+    display:inline-block;
+    margin-top:12px;
+    padding:7px 14px;
+    border-radius:999px;
+    background:rgba(0,229,255,.12);
+    color:#8ff5ff;
+    font-size:.8rem;
+}
+
+.loading{
+    text-align:center;
+    padding:40px;
+    color:var(--muted);
+}
+
+.empty{
+    text-align:center;
+    padding:50px;
+    color:var(--muted);
+}
+
+.error{
+    text-align:center;
+    color:#ff7f7f;
+    padding:30px;
+}
+
+footer{
+    text-align:center;
+    color:var(--muted);
+    padding:40px 10px;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@media(max-width:600px){
+
+    .gallery{
+        grid-template-columns:1fr;
+        gap:16px;
+    }
+
+    .card img{
+        height:200px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<div class="container">
+
+<div class="hero">
+    <h1>Note Gallery</h1>
+    <p>Shared Resources & Department Gallery</p>
+
+    <a href="index.html" class="back-btn">
+        ← Back To Home
+    </a>
+</div>
+
+<div class="search-container">
+    <input
+        type="text"
+        id="searchInput"
+        class="search-box"
+        placeholder="Search by title, uploader or category..."
+    >
+</div>
+
+<div id="loading" class="loading">
+    Loading gallery...
+</div>
+
+<div id="gallery" class="gallery"></div>
+
+<div id="error" class="error"></div>
+
+<footer>
+BiE-06 • Notes Repository <br> • Created by Ar!f <br> • Donate me on Bkash : 01804xxxxxx
+</footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+/* ===========================
+   PASTE YOUR VALUES HERE
+=========================== */
+
+const SUPABASE_URL =
+"https://pxzavbpnxwgysomqunpf.supabase.co";
+
+const SUPABASE_ANON_KEY =
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4emF2YnBueHdneXNvbXF1bnBmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MzUyMDgsImV4cCI6MjA5NzIxMTIwOH0.JPw1Hm4n9oqghLXyfTdatKXTqb8vZENp0PPYbJG4ahs";
+
+/* ===========================
+   INITIALIZATION
+=========================== */
+
+const supabaseClient=
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+);
+
+const gallery =
+document.getElementById("gallery");
+
+const loading =
+document.getElementById("loading");
+
+const errorBox =
+document.getElementById("error");
+
+let allImages = [];
+
+/* ===========================
+   LOAD IMAGES
+=========================== */
+
+async function loadGallery(){
+
+    try{
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+        .from("gallery_images")
+        .select("*")
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        );
+
+        if(error){
+            throw error;
+        }
+
+        allImages = data || [];
+
+        renderGallery(allImages);
+
+    }
+
+  catch(err){
+  
+  console.error(err);
+  
+  errorBox.innerHTML =
+  `
+  Failed to load gallery.<br><br>
+  ${JSON.stringify(err)}
+  `;
+  
+  }
+
+    finally{
+
+        loading.style.display =
+        "none";
+
+    }
+
+}
+
+/* ===========================
+   RENDER
+=========================== */
+
+function renderGallery(items){
+
+    gallery.innerHTML = "";
+
+    if(items.length === 0){
+
+        gallery.innerHTML =
+        `
+        <div class="empty">
+            No items found.
+        </div>
+        `;
+
+        return;
+    }
+
+    items.forEach(item => {
+
+        const card =
+        document.createElement("div");
+
+        card.className = "card";
+
+        card.innerHTML = `
+        <img
+            src="${item.image_url}"
+            alt="${item.Title || 'Image'}"
+        >
+
+        <div class="card-content">
+
+            <div class="card-title">
+                ${item.Title || 'Untitled'}
+            </div>
+
+            <div class="meta">
+                👤 ${item.uploaded_by || 'Unknown'}
+            </div>
+
+            <div class="category">
+                ${item.category || 'General'}
+            </div>
+
+        </div>
+        `;
+
+        gallery.appendChild(card);
+
+    });
+
+}
+
+/* ===========================
+   SEARCH
+=========================== */
+
+document
+.getElementById("searchInput")
+.addEventListener("input", function(){
+
+    const q =
+    this.value.toLowerCase();
+
+    const filtered =
+    allImages.filter(item => {
+
+        return (
+            (item.Title || '')
+            .toLowerCase()
+            .includes(q)
+
+            ||
+
+            (item.uploaded_by || '')
+            .toLowerCase()
+            .includes(q)
+
+            ||
+
+            (item.category || '')
+            .toLowerCase()
+            .includes(q)
+        );
+
+    });
+
+    renderGallery(filtered);
+
+});
+
+/* ===========================
+   START
+=========================== */
+
+loadGallery();
+
+</script>
+
+</body>
+</html>
