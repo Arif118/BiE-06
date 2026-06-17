@@ -399,7 +399,7 @@ async function(e){
             error:uploadError
         } = await supabaseClient
         .storage
-        .from("NOTES")
+        .from("Notes")
         .upload(
             fileName,
             file
@@ -412,7 +412,7 @@ async function(e){
             data:publicData
         } = supabaseClient
         .storage
-        .from("NOTES")
+        .from("Notes")
         .getPublicUrl(
             fileName
         );
