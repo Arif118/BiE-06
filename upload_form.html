@@ -397,7 +397,7 @@ async function(e){
 
         const {
             error:uploadError
-        } = await supabase
+        } = await supabaseClient
         .storage
         .from("NOTES")
         .upload(
@@ -410,7 +410,7 @@ async function(e){
 
         const {
             data:publicData
-        } = supabase
+        } = supabaseClient
         .storage
         .from("NOTES")
         .getPublicUrl(
@@ -422,7 +422,7 @@ async function(e){
 
         const {
             error:dbError
-        } = await supabase
+        } = await supabaseClient
         .from("gallery_images")
         .insert([
             {
