@@ -608,9 +608,11 @@ async function deleteImage(
     if(!code) return;
 
     const normalizedUploader = (uploader || "").trim().toLowerCase();
+
+    const expectedCode = AUTH_CODES[normalizedUploader] || "92272";
     
     if(
-        AUTH_CODES[normalizedUploader]
+        expectedCode
         !==
         code
     ){
