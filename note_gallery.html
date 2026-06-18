@@ -216,6 +216,90 @@ footer{
     }
 
 }
+    
+    
+    .action-buttons{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:15px;
+}
+
+.view-btn,
+.delete-btn{
+
+    flex:1;
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:10px;
+
+    border-radius:12px;
+
+    color:white;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.view-btn{
+
+    background:linear-gradient(
+        135deg,
+        #00e5ff,
+        #007bff
+    );
+}
+
+.delete-btn{
+
+    background:linear-gradient(
+        135deg,
+        #ff5c5c,
+        #ff2e63
+    );
+}
+
+.view-btn:hover,
+.delete-btn:hover{
+
+    transform:translateY(-3px);
+}
+
+/* FULL SCREEN IMAGE */
+
+.image-modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.92);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+}
+
+.image-modal img{
+
+    max-width:95%;
+
+    max-height:95%;
+
+    border-radius:18px;
+}
+    
+    
 </style>
 </head>
 
@@ -379,19 +463,39 @@ function renderGallery(items){
 
         <div class="card-content">
 
-            <div class="card-title">
-                ${item.Title || 'Untitled'}
-            </div>
+    <div class="card-title">
+        ${item.Title || 'Untitled'}
+    </div>
 
-            <div class="meta">
-                👤 ${item.uploaded_by || 'Unknown'}
-            </div>
+    <div class="meta">
+        👤 ${item.uploaded_by || 'Unknown'}
+    </div>
 
-            <div class="category">
-                ${item.category || 'General'}
-            </div>
+    <div class="category">
+        ${item.category || 'General'}
+    </div>
 
-        </div>
+    <div class="action-buttons">
+
+        <button
+        class="view-btn"
+        onclick="viewImage('${item.image_url}')">
+        👁 View
+        </button>
+
+        <button
+        class="delete-btn"
+        onclick="deleteImage(
+            '${item.id}',
+            '${item.uploaded_by}',
+            '${item.file_name}'
+        )">
+        🗑 Delete
+        </button>
+
+    </div>
+
+</div>
         `;
 
         gallery.appendChild(card);
@@ -444,7 +548,153 @@ document
 
 loadGallery();
 
+    
+    
+    
+    
+/* ===========================
+VIEW IMAGE
+=========================== */
+
+function viewImage(url){
+
+    document
+    .getElementById("modalImage")
+    .src = url;
+
+    document
+    .getElementById("imageModal")
+    .style.display =
+    "flex";
+}
+
+function closeImage(){
+
+    document
+    .getElementById("imageModal")
+    .style.display =
+    "none";
+}
+
+/* ===========================
+DELETE SYSTEM
+=========================== */
+
+const AUTH_CODES = {
+
+    "arif": "11896",
+    "ar!f": "11896",
+    "apon" : "98000",
+    "rafsan": "01123",
+    "soroj": "98880",
+    "sakur" : "25126",
+    "fahim" : "50373",
+    "minhaz" : "35813",
+    "nafis" : "32007"
+    
+};
+
+async function deleteImage(
+    imageId,
+    uploader,
+    fileName
+){
+
+    const code =
+    prompt(
+    `Enter authentication code for ${uploader}`
+    );
+
+    if(!code) return;
+
+    const normalizedUploader = (uploader || "").trim().toLowerCase();
+    
+    if(
+        AUTH_CODES[normalizedUploader]
+        !==
+        code
+    ){
+
+        alert(
+        "Wrong authentication code."
+        );
+
+        return;
+    }
+
+    const confirmDelete =
+    confirm(
+    "Delete this image?"
+    );
+
+    const {
+    error: storageError
+}
+=
+await supabaseClient
+.storage
+.from("Notes")
+.remove([
+    fileName
+]);
+
+if(storageError){
+
+    alert(
+    "Storage delete failed."
+    );
+
+    console.error(storageError);
+
+    return;
+}
+    
+    if(!confirmDelete)
+    return;
+
+    const {
+        error
+    } = await supabaseClient
+    .from("gallery_images")
+    .delete()
+    .eq(
+        "id",
+        imageId
+    );
+
+    if(error){
+
+        alert(
+        "Delete failed."
+        );
+
+        console.error(error);
+
+        return;
+    }
+
+    alert(
+    "Image deleted successfully."
+    );
+
+    loadGallery();
+}
+    
+    
+    
 </script>
 
+    
+    
+    
+<div
+id="imageModal"
+class="image-modal"
+onclick="closeImage()">
+<img id="modalImage">
+
+</div>
+    
+    
 </body>
 </html>
