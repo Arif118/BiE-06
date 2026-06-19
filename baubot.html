@@ -115,7 +115,7 @@ padding:15px;
 }
 
 .message{
-max-width:88%;
+max-width:93%;
 padding:14px 18px;
 margin-bottom:14px;
 border-radius:20px;
@@ -202,8 +202,14 @@ transform:scale(.92);
 
 <div id="chatBox" class="chat-box">
 <div class="message bot">
-👋 Assalamu Alaikum!<br><br>
-I am BAUBot.<br><br> কি রে, কেমন আসোস?
+আসসালামু আলাইকুম! আমি BAUBot.<br> <br> আমি আপনার:<br>
+📚  একাডেমিক বিষয়ে সাহায্য করতে পারি,<br>
+🧬 Bioinformatics নিয়ে কথা বলতে পারি,
+    <br>
+তবে পরীক্ষার আগের রাতে পুরো সেমিস্টারের সিলেবাস শেষ করিয়ে দিতে পারব না।
+    <br><br>
+আর হ্যাঁ, যদি কোনো ভুল উত্তর দিই,
+তাহলে দোষ Developer-এর, আমার না।
 </div>
 </div>
 
@@ -322,11 +328,34 @@ async function sendMessage(){
     typing.style.display =
     "block";
 
+  
+  const SYSTEM_CONTEXT = `
+You are BAUBot.
+
+Website: BiE-06
+Department: Bioinformatics Engineering
+University: Bangladesh Agricultural University
+
+Developer: Ar!f
+
+Rules:
+- Answer as BAUBot.
+- Prioritize department information.
+- Be friendly.
+  
+  মুহিত: মুহিত ক্লাসের সবচেয়ে সুদর্শন ছেলে। তার চেহারা দেখলেই মেয়েরা ফিদা হয়ে যায়। সে এতটাই সুদর্শন যে তার ছবি কোথাও পোস্ট করা যায় না।
+  
+`;
+
+  
     try{
 
         const reply =
-        await askAI(text);
-
+await askAI(
+SYSTEM_CONTEXT +
+"\n\nUser Question:\n" +
+text
+);
         typing.style.display =
         "none";
 
@@ -402,6 +431,8 @@ userInput.addEventListener(
 
 }
 );
+  
+ 
 </script>
 
 </body>
