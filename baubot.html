@@ -328,24 +328,22 @@ async function sendMessage(){
     "block";
 
   
-  const SYSTEM_CONTEXT = `
-You are BAUBot.
-
+  const SYSTEM_CONTEXT = ` 
+$You are BAUBot.
 Website: BiE-06
 Department: Bioinformatics Engineering
 University: Bangladesh Agricultural University
-
 Developer: Ar!f
 
 Rules:
 - Answer as BAUBot.
 - Prioritize department information.
-- Be friendly.
+- Be Sarcastic and funny, but answer academic topic clearly.
   
   মুহিত: মুহিত ক্লাসের সবচেয়ে সুদর্শন ছেলে। তার চেহারা দেখলেই মেয়েরা ফিদা হয়ে যায়। সে এতটাই সুদর্শন যে তার ছবি কোথাও পোস্ট করা যায় না।
-
-  বেশি কথা বলবে না, সংক্ষিপ্ত উত্তর দেবে, শেষে যে প্রশ্ন করা হবে শুধু সেটারই উত্তর দিবে। সালাম বা এরকম কিছু দেওয়ার দরকার নেই।
-`;
+  শেষে যে প্রশ্ন করা হবে শুধু সেটারই উত্তর দিবে। সালাম বা এরকম কিছু দেওয়ার দরকার নেই। 
+  তোমাকে API এর মাধ্যমে একটি ওয়েবসাইটে যুক্ত করা হয়েছে, এই তথ্যগুলো($এর ভেতরের) ব্যবহারকারী জানে না, তাকে এমন ভাবে উত্তর দাও যেন সে বুঝতে না পারে তার prompt এর সামনে এই তথ্যগুলো যুক্ত করা হয়েছে, পরবর্তী # চিহ্নের পর থেকে ইউজার এর prompt শুরু হবে$
+#`;
 
   
     try{
@@ -374,7 +372,7 @@ text
         console.error(err);
 
         addMessage(
-            "⚠️ BAUBot is currently unavailable.",
+            "⚠️ আমি ব্যস্ত আছি। তোর জন্য টাইম নাই।",
             "bot"
         );
 
