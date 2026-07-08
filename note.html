@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upload Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+body{
+min-height:100vh;
+background:linear-gradient(135deg,#061b33,#0d5fa8,#5ecbff);
+display:flex;align-items:center;justify-content:center;
+padding:30px;overflow:auto;color:#fff;
+}
+body:before{
+content:"";position:fixed;inset:0;
+background:
+radial-gradient(circle at 20% 20%,rgba(255,255,255,.12),transparent 20%),
+radial-gradient(circle at 80% 70%,rgba(255,255,255,.08),transparent 25%);
+animation:float 8s ease-in-out infinite alternate;
+}
+@keyframes float{to{transform:translateY(-20px)}}
+.card{
+overflow:hidden;
+position:relative;z-index:1;
+width:min(700px,100%);
+background:rgba(255,255,255,.12);
+backdrop-filter:blur(0px);
+border:1px solid rgba(255,255,255,.2);
+border-radius:24px;
+padding:30px;
+box-shadow:0 15px 35px rgba(0,0,0,.25);
+}
+h1{font-size:2rem}
+p{opacity:.9;margin:10px 0 24px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
+.input,textarea,select{
+width:100%;padding:13px 15px;border:none;border-radius:14px;
+background:rgba(255,255,255,.15);color:#fff;outline:none;
+}
+textarea{min-height:100px;resize:vertical}
+.input::placeholder,textarea::placeholder{color:#e7f6ff}
+.radio{display:flex;gap:18px;padding:8px 0}
+.radio label{display:flex;gap:6px;align-items:center}
+.instructions{
+margin:20px 0;padding:16px;border-radius:16px;
+background:rgba(255,255,255,.08);
+}
+button{
+width:100%;padding:15px;border:none;border-radius:16px;
+font-size:1rem;font-weight:700;
+background:linear-gradient(90deg,#38bdf8,#0ea5e9);
+color:#fff;cursor:pointer;transition:.25s;
+}
+button:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(0,0,0,.25)}
+#popup{
+display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);
+align-items:center;justify-content:center;
+}
+.box{
+background:#fff;color:#123;padding:28px;border-radius:18px;
+width:320px;text-align:center;
+}
+.box button{margin-top:15px}
+  
+  
+  
+  
+/* ==========================
+   FLOATING OCEAN BUBBLES
+========================== */
+
+.bubble-container{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:0;
+}
+
+.bubble{
+    position:absolute;
+    bottom:-120px;
+    border-radius:50%;
+    background:radial-gradient(
+        circle at 30% 30%,
+        rgba(255,255,255,.95),
+        rgba(255,255,255,.35) 45%,
+        rgba(255,255,255,.08) 70%,
+        transparent 100%
+    );
+    box-shadow:
+        inset -4px -6px 10px rgba(255,255,255,.2),
+        0 0 15px rgba(173,230,255,.35);
+
+    animation-name:rise;
+    animation-timing-function:linear;
+    animation-iteration-count:infinite;
+
+    backdrop-filter:blur(2px);
+}
+
+.bubble::before{
+    content:"";
+    position:absolute;
+    width:30%;
+    height:30%;
+    top:18%;
+    left:20%;
+    border-radius:50%;
+    background:rgba(255,255,255,.8);
+    filter:blur(1px);
+}
+
+@keyframes rise{
+
+    0%{
+        transform:
+        translate(0,0)
+        scale(.2);
+        opacity:0;
+    }
+
+    10%{
+        opacity:.55;
+    }
+
+    25%{
+        transform:
+        translate(-12px,-25vh)
+        scale(.6);
+    }
+
+    50%{
+        transform:
+        translate(15px,-50vh)
+        scale(.85);
+    }
+
+    75%{
+        transform:
+        translate(-18px,-75vh)
+        scale(1);
+    }
+
+    100%{
+        transform:
+        translate(10px,-115vh)
+        scale(1.08);
+
+        opacity:0;
+    }
+}
+  
+  
+  
+.card-bubbles{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+}
+
+.card>*{
+    position:relative;
+    z-index:2;
+}
+</style>
+</head>
+<body>
+<div class="bubble-container"></div>
+<div class="card">
+  <div class="card-bubbles"></div>
+<h1>📚 Upload Study Notes</h1>
+<p>Share your Google Drive PDF or image notes with fellow students.</p>
+
+<form id="demoForm">
+<div class="grid">
+<input class="input" placeholder="Username" required>
+<input class="input" placeholder="Roll Number" required>
+<input class="input" placeholder="Semester">
+<input class="input" placeholder="Subject Name">
+</div>
+
+<div style="margin-top:16px">
+<input class="input" placeholder="Note Title">
+</div>
+
+<div class="radio">
+<label><input type="radio" name="t" checked> PDF</label>
+<label><input type="radio" name="t"> Image</label>
+</div>
+
+<input class="input" type="url" placeholder="Google Drive Link">
+
+<div style="margin-top:16px">
+<textarea placeholder="Short Description (Optional)"></textarea>
+</div>
+
+<div class="instructions">
+<b>Instructions</b>
+<ul style="margin:10px 0 0 20px">
+<li>Upload your file to Google Drive.</li>
+<li>Set sharing to <i>Anyone with the link can view</i>.</li>
+<li>Paste the link above.</li>
+<li>Click Submit.</li>
+</ul>
+</div>
+
+<button type="submit">🚀 Submit Note</button>
+</form>
+</div>
+
+
+<script>
+demoForm.addEventListener("submit",e=>{
+e.preventDefault();
+popup.style.display="flex";
+});
+  
+  
+/* ==========================
+   FLOATING BUBBLES
+========================== */
+
+const bubbleContainer =
+document.querySelector(".bubble-container");
+
+const TOTAL_BUBBLES = 40;
+
+for(let i=0;i<TOTAL_BUBBLES;i++){
+
+    const bubble =
+    document.createElement("span");
+
+    bubble.className = "bubble";
+
+    // Random size
+    const size =
+    Math.random()*28 + 8;
+
+    bubble.style.width = size+"px";
+    bubble.style.height = size+"px";
+
+    // Random position
+    bubble.style.left =
+    Math.random()*100+"%";
+
+    // Random animation duration
+    bubble.style.animationDuration =
+    (8+Math.random()*12)+"s";
+
+    // Random delay
+    bubble.style.animationDelay =
+    (-Math.random()*20)+"s";
+
+    // Random opacity
+    bubble.style.opacity =
+    0.15+Math.random()*0.45;
+
+    bubbleContainer.appendChild(bubble);
+
+}
+</script>
+</body>
+</html>
